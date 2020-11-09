@@ -1,0 +1,9 @@
+name: gym-minichess
+
+dependencies:
+  - python=3.7.4
+  - pip
+  - pip:
+    - gym
+    - numpy
+    - minichess @ git+https://github.com/mdhiebert/minichess#egg=minichess
