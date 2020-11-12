@@ -82,7 +82,7 @@ class GardnerMiniChessEnv(gym.Env):
 
         mask = self.board.legal_action_mask()
 
-        return mask.nonzero()
+        return mask.nonzero()[0]
 
     def close(self):
         pass
