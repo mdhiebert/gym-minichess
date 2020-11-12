@@ -2,8 +2,10 @@ import gym
 from gym import error, spaces, utils
 from gym.utils import seeding
 
-from minichess.games.gardner.board import GardnerChessBoard, LEN_ACTION_SPACE
+import numpy as np
 
+from minichess.games.gardner.action import GardnerChessAction
+from minichess.games.gardner.board import GardnerChessBoard, LEN_ACTION_SPACE
 from minichess.games.abstract.piece import PieceColor
 from minichess.games.abstract.board import AbstractBoardStatus
 from minichess.games.abstract.action import AbstractActionFlags
@@ -25,6 +27,12 @@ class GardnerMiniChessEnv(gym.Env):
         self.observation_space = spaces.Box(0, 1, shape=(self.board.height, self.board.width, 12))
 
     def step(self, action):
+
+        # we must convert the action (an integer) to an appropriate chess action
+        action_idx = action
+        action_vector = np.zeros(self.action_space.n)
+        action_vector[action_idx] = 1
+        action = GardnerChessAction.decode(action_vector)
 
         self.board.push(action)
 
