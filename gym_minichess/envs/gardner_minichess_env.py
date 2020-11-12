@@ -26,6 +26,9 @@ class GardnerMiniChessEnv(gym.Env):
         self.action_space = spaces.Discrete(LEN_ACTION_SPACE)
         self.observation_space = spaces.Box(0, 1, shape=(self.board.height, self.board.width, 12))
 
+        if adversary == None:
+            self.adversary = RandomPlayer()
+
     def step(self, action):
 
         # we must convert the action (an integer) to an appropriate chess action
