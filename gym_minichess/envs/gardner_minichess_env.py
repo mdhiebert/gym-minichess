@@ -49,10 +49,10 @@ class GardnerMiniChessEnv(gym.Env):
             reward += CHECK_REWARD
 
         # have opponent move
-        proposed_action = self.adversary.propose_action(self.board, self.board.active_color, self.board.legal_action_mask())
+        opponent_can_move, proposed_action = self.adversary.propose_action(self.board, self.board.active_color, self.board.legal_action_mask())
 
         # apply a legal action to our board, if able
-        if proposed_action != None:
+        if opponent_can_move:
             self.board.push(proposed_action)
 
             # penalize opponent checking moves
