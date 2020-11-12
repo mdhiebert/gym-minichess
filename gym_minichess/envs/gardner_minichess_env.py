@@ -32,7 +32,7 @@ class GardnerMiniChessEnv(gym.Env):
         action_idx = action
         action_vector = np.zeros(self.action_space.n)
         action_vector[action_idx] = 1
-        action = GardnerChessAction.decode(action_vector)
+        action = GardnerChessAction.decode(action_vector, self.board)
 
         self.board.push(action)
 
