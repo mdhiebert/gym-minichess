@@ -2,7 +2,7 @@ from gym.envs.registration import register
 
 register(
     id='minichess-gardner-v0',
-    entry_point='gym_minichess.envs:GardnerMinichessEnv'
+    entry_point='gym_minichess.envs:GardnerMiniChessEnv'
 )
 
 # more variants here # TODO
