@@ -37,7 +37,7 @@ register(
 #     entry_point='gym_minichess.envs:ProgressiveMinichessEnv'
 # )
 
-# register(
-#     id='minichess-rifle-v0',
-#     entry_point='gym_minichess.envs:RifleMinichessEnv'
-# )
+register(
+    id='minichess-rifle-v0',
+    entry_point='gym_minichess.envs:RifleMinichessEnv'
+)

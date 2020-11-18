@@ -4,8 +4,8 @@ from gym.utils import seeding
 
 import numpy as np
 
-from minichess.games.gardner.action import GardnerChessAction
-from minichess.games.gardner.board import GardnerChessBoard, LEN_ACTION_SPACE
+from minichess.games.rifle.action import RifleChessAction
+from minichess.games.rifle.board import RifleChessBoard, LEN_ACTION_SPACE
 from minichess.games.abstract.piece import PieceColor
 from minichess.games.abstract.board import AbstractBoardStatus
 from minichess.games.abstract.action import AbstractActionFlags
@@ -18,11 +18,11 @@ logger = logging.getLogger(__name__)
 CHECKMATE_REWARD = 25_000
 CHECK_REWARD = 500
 
-class GardnerMiniChessEnv(gym.Env):
+class RifleMiniChessEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self, adversary=None):
-        self.board = GardnerChessBoard()
+        self.board = RifleChessBoard()
         self.action_space = spaces.Discrete(LEN_ACTION_SPACE)
         self.observation_space = spaces.Box(0, 1, shape=(self.board.height, self.board.width, 12))
 
@@ -35,7 +35,7 @@ class GardnerMiniChessEnv(gym.Env):
         action_idx = action
         action_vector = np.zeros(self.action_space.n)
         action_vector[action_idx] = 1
-        action = GardnerChessAction.decode(action_vector, self.board)
+        action = RifleChessAction.decode(action_vector, self.board)
 
         self.board.push(action)
 
@@ -66,7 +66,7 @@ class GardnerMiniChessEnv(gym.Env):
         return observation, reward, done, info
 
     def reset(self):
-        self.board = GardnerChessBoard()
+        self.board = RifleChessBoard()
 
         return self.board.state_vector()
 
@@ -76,7 +76,7 @@ class GardnerMiniChessEnv(gym.Env):
         elif mode == 'human':
             print(self.board)
         else:
-            super(GardnerMiniChessEnv, self).render(mode=mode) # just raise an exception
+            super(RifleMiniChessEnv, self).render(mode=mode) # just raise an exception
 
     def legal_actions(self):
         '''
