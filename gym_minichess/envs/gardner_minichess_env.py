@@ -4,6 +4,8 @@ from gym.utils import seeding
 
 import numpy as np
 
+import random
+
 from minichess.games.gardner.action import GardnerChessAction
 from minichess.games.gardner.board import GardnerChessBoard, LEN_ACTION_SPACE
 from minichess.games.abstract.piece import PieceColor
@@ -86,6 +88,12 @@ class GardnerMiniChessEnv(gym.Env):
         mask = self.board.legal_action_mask()
 
         return mask.nonzero()[0]
+
+    def to_play(self):
+        return 0 if self.board.active_color == PieceColor.WHITE else 1
+
+    def random_action(self):
+        return random.choice(self.legal_actions())
 
     def close(self):
         pass
